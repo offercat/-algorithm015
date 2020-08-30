@@ -28,26 +28,6 @@ https://leetcode-cn.com/problems/3sum/
 <br/>空间复杂度：O(1)**
 ```java
 class Solution {
-    public int climbStairs(int n) {
-        if (n == 1) return 1;
-        int[] a = new int[n+1];
-        a[1] = 1;
-        a[2] = 2;
-        for (int i=3; i<=n; i++) {
-            a[i] = a[i-1] + a[i-2];
-        }
-        return a[n];
-    }
-}
-```
-----
-#### 3、爬楼梯
-https://leetcode-cn.com/problems/climbing-stairs/
-<br/>**解题思路：用数组来保存斐波拉契序列
-<br/>时间复杂度：O(n)
-<br/>空间复杂度：O(n)**
-```java
-class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(nums);
@@ -69,6 +49,26 @@ class Solution {
             }
         }
         return result;
+    }
+}
+```
+----
+#### 3、爬楼梯
+https://leetcode-cn.com/problems/climbing-stairs/
+<br/>**解题思路：用数组来保存斐波拉契序列
+<br/>时间复杂度：O(n)
+<br/>空间复杂度：O(n)**
+```java
+class Solution {
+    public int climbStairs(int n) {
+        if (n == 1) return 1;
+        int[] a = new int[n+1];
+        a[1] = 1;
+        a[2] = 2;
+        for (int i=3; i<=n; i++) {
+            a[i] = a[i-1] + a[i-2];
+        }
+        return a[n];
     }
 }
 ```
