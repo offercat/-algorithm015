@@ -211,3 +211,96 @@ class Solution {
     }
 }
 ```
+----
+### 二、链表
+#### 1、反转链表
+https://leetcode-cn.com/problems/reverse-linked-list/
+<br/>**解题思路：利用pre节点驱动反转
+<br/>时间复杂度：O(n)
+<br/>空间复杂度：O(1)**
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while(cur != null) {
+            ListNode a = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = a;
+        }
+        return pre;
+    }
+}
+```
+----
+#### 2、两两交换链表中的节点
+https://leetcode-cn.com/problems/swap-nodes-in-pairs/
+<br/>**解题思路：理清节点交换思路即可
+<br/>时间复杂度：O(n)
+<br/>空间复杂度：O(1)**
+```java
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode self = new ListNode(-1);
+        ListNode prev = self;
+        prev.next = head;
+        ListNode cur = head;
+        while(cur != null && cur.next != null) {
+            ListNode first = cur.next;
+            ListNode second = cur;
+            cur = cur.next.next;
+
+            prev.next = first;
+            first.next = second;
+            second.next = cur;
+
+            prev = second;
+        }
+        return self.next;
+    }
+}
+```
+----
+#### 3、K 个一组翻转链表
+https://leetcode-cn.com/problems/reverse-nodes-in-k-group/
+<br/>**解题思路：综合链表反转，理清节点交换思路即可
+<br/>时间复杂度：O(n)
+<br/>空间复杂度：O(1)**
+```java
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode self = new ListNode(-1);
+        self.next = head;
+        ListNode pre = self;
+        ListNode end = self;
+
+        while (end.next != null) {
+            for (int i=0; i<k && end != null; i++) {
+                end = end.next;
+            }
+            if (end == null) break;
+            ListNode next = end.next;
+            end.next = null;
+            ListNode start = pre.next;
+            pre.next = reverse(start);
+            start.next = next;
+            pre = start;
+            end = start;
+        }
+        return self.next;
+    }
+
+    private ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+}
+```
